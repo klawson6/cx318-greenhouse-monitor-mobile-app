@@ -30,6 +30,18 @@ p{
   color: blueviolet;
 }
 
+img.imgGH{
+	float : right;
+	width : 130px;
+	height : 130px;
+	border : 0;
+	overflow: invisible;
+	margin : 0px;
+	position : absolute;
+	top : 5px;
+	right : 5px;
+}
+
 .clearfix::after {
   content: "";
   clear: both;
