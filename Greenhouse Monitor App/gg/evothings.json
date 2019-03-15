@@ -1,0 +1,20 @@
+{
+  "name": "gg",
+  "version": "1.0.0",
+  "title": "Basic Template App",
+  "description": "A basic template for a simple Evothings app.",
+  "tags": [],
+  "libraries": [
+    {
+      "name": "jquery",
+      "version": "2.1.1"
+    }
+  ],
+  "plugins": [],
+  "index-file": "index.html",
+  "uuid": "731194ba-add5-4f4f-88c3-0d2bad42fa04",
+  "icon": "app-icon.png",
+  "doc-url": "http://evothings.com/2.2/doc/examples/template-basic-app.html",
+  "long-description": "A basic template for a simple Evothings app.",
+  "cordova-id": "com.evothings.examples.templatebasicapp"
+}
