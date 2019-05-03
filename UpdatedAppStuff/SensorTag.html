@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="author" content="Connor ;p ">
+<title>SensorTag Data</title>
+<link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
+    type="text/css" media="screen"/>
+
+
+</head>
+<body>
+
+<h1>  
+	SensorTag Data Results!
+	<img class="imgGH" src="greenhouse.png" alt="Just wanted a greenhouse image" media="screen and (max-width: 3em) and (max-height: 3em) ">
+</h1>
+<p>The results shown below will update every 30 seconds</p>
+
+<h2> Temperature Results: </h2>
+<p>	<div id="myTemp">Temperature placeholder </div> <br> </p>
+<h2> Light Results: </h2>
+<p> <div id="myLight">Light placeholder</div> <br> </p>
+<h2> Humidity Results: </h2>
+<p> <div id="myHumidity">Humidity placeholder</div><br> </p>
+
+
+<!-- <hr></hr> -->
+
+<script>
+getTemp();
+getLight();
+getHumidity();
+var delay = 1000*60*0.5; //For every 30 seconds
+setInterval(getTemp, delay);
+setInterval(getLight, delay);
+setInterval(getHumidity, delay); 
+
+function getTemp(){
+var xhttp1 = new XMLHttpRequest();
+xhttp1.onreadystatechange = function() {
+    if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+       // Typical action to be performed when the document is ready:
+       document.getElementById("myTemp").innerHTML = xhttp1.responseText;
+    }
+};
+xhttp1.open("GET", "http://127.0.0.1:1880/getTemp", false);
+xhttp1.send();
+}
+
+function getLight(){
+var xhttp2 = new XMLHttpRequest();
+xhttp2.onreadystatechange = function() {
+    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+       // Typical action to be performed when the document is ready:
+       document.getElementById("myLight").innerHTML = xhttp2.responseText;
+    }
+};
+xhttp2.open("GET", "http://127.0.0.1:1880/getLight", false);
+xhttp2.send();
+}
+
+function getHumidity(){
+var xhttp3 = new XMLHttpRequest();
+xhttp3.onreadystatechange = function() {
+    if (xhttp3.readyState == 4 && xhttp3.status == 200) {
+       // Typical action to be performed when the document is ready:
+       document.getElementById("myHumidity").innerHTML = xhttp3.responseText;
+    }
+};
+xhttp3.open("GET", "http://127.0.0.1:1880/getHumidity", false);
+xhttp3.send();
+}
+
+</script>
+
+
+</body>
+</html>
