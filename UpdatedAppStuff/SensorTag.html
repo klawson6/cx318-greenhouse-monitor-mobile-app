@@ -30,7 +30,7 @@
 getTemp();
 getLight();
 getHumidity();
-var delay = 1000*60*0.5; //For every 30 seconds
+var delay = 1000; //For every 30 seconds
 setInterval(getTemp, delay);
 setInterval(getLight, delay);
 setInterval(getHumidity, delay); 
@@ -43,7 +43,7 @@ xhttp1.onreadystatechange = function() {
        document.getElementById("myTemp").innerHTML = xhttp1.responseText;
     }
 };
-xhttp1.open("GET", "http://127.0.0.1:1880/getTemp", false);
+xhttp1.open("GET", "http://conrfield.com:1880/getTemp", false);
 xhttp1.send();
 }
 
@@ -55,7 +55,7 @@ xhttp2.onreadystatechange = function() {
        document.getElementById("myLight").innerHTML = xhttp2.responseText;
     }
 };
-xhttp2.open("GET", "http://127.0.0.1:1880/getLight", false);
+xhttp2.open("GET", "http://conrfield.com:1880/getLight", false);
 xhttp2.send();
 }
 
@@ -67,7 +67,7 @@ xhttp3.onreadystatechange = function() {
        document.getElementById("myHumidity").innerHTML = xhttp3.responseText;
     }
 };
-xhttp3.open("GET", "http://127.0.0.1:1880/getHumidity", false);
+xhttp3.open("GET", "http://conrfield.com:1880/getHumidity", false);
 xhttp3.send();
 }
 
