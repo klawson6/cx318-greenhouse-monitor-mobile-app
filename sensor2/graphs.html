@@ -13,21 +13,19 @@
         // getHumidity();
 
         //Global variables for the data
-        var temp = 0;
-        var light = 0;
-        var humidity = 0;
+
 
 
         window.onload = function () {
+
 
 
             //Set up variables used to plot graphs
             var dps = []; // dataPoints
             var dps1 = [];
             var dps2 = [];
-           var xVal = 0;
             var updateInterval = 3000;
-            var dataLength = 20; // number of dataPoints visible at any point
+            var dataLength = 10; // number of dataPoints visible at any point
 
             var tempChart = new CanvasJS.Chart("tempChartContainer", {
                 title: {
@@ -40,13 +38,13 @@
                      labelAngle: -20
                 },
                 axisY: {
-                    title: "Temperature",
+                    title: "Temperature (°C)",
                     includeZero: false
                 },
                 data: [{
                     type: "line",
                     dataPoints: dps,
-                   // xValueFormatString: "hh:mm:ss",
+
                 }]
             });
 
@@ -62,7 +60,7 @@
                 },
                 axisY: {
                     includeZero: false,
-                    title: "Light",
+                    title: "Light (lx)",
                 },
                 data: [{
                     type: "line",
@@ -80,6 +78,7 @@
                     labelAngle: -20
                 },
                 axisY: {
+
                     includeZero: false,
                     title: "Humidity",
                 },
@@ -91,65 +90,61 @@
 
 
             //Function to update the temperature chart with new data
-            var updateTempChart = function (count) {
-
-                count = count || 1;
-
-                var time = new Date();
-               xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
-
-                var  yVal = getTemp();
-
-              if(yVal !== null) {
-                  for (var j = 0; j < count; j++) {
-
-                      dps.push({
-                              x: xVal,
-                              y: yVal
-                          }
-                      );
-
-                  }
-
-                  if (dps.length > dataLength) {
-                      dps.shift();
-                  }
-
-
-                  tempChart.render();
-             }
-            };
-
-            //Function to update the light chart with new data
-
-            var updateLightChart = function (count) {
+            var updateTempChart = function (count,temp) {
 
                 count = count || 1;
 
                 var time = new Date();
                 xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
 
-                for (var j = 0; j < count; j++) {
+                  for (var j = 0; j < count; j++) {
 
-                    dps1.push({
-                            x: xVal,
-                            y: getLight()
-                        }
-                    );
+                      dps.push({
+                              x: xVal,
+                              y: temp
+                          }
+                      );
+                  }
 
-                }
+                  if (dps.length > dataLength) {
+                      dps.shift();
+                  }
+                  tempChart.render();
 
-                if (dps1.length > dataLength) {
-                    dps1.shift();
-                }
+            };
 
-                lightChart.render();
+            //Function to update the light chart with new data
+
+            var updateLightChart = function (count,light) {
+
+                count = count || 1;
+
+                var time = new Date();
+                xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
+
+
+                    for (var j = 0; j < count; j++) {
+
+                        dps1.push({
+                                x: xVal,
+                                y: light
+                            }
+                        );
+
+                    }
+
+                    if (dps1.length > dataLength) {
+                        dps1.shift();
+                    }
+
+                    lightChart.render();
+
             };
 
 
             //Function to update the humidity chart with new data
 
-            var updateHumidityChart = function (count) {
+            var updateHumidityChart = function (count,humid) {
 
                 count = count || 1;
 
@@ -160,83 +155,70 @@
 
                     dps2.push({
                             x: xVal,
-                            y: getHumidity()
+                            y: humid
                         }
                     );
-
                 }
-
                 if (dps2.length > dataLength) {
-                    dps.shift();
+                    dps2.shift();
                 }
-
                 humidityChart.render();
+
             };
+            // function updateDataLength(){
+            //     if(dataLength<20)
+            //         dataLength++;
+            // }
+          //  setInterval(updateDataLength,updateInterval);
 
-            updateTempChart(dataLength);
-            setInterval(function () {updateTempChart()}, updateInterval);
+            //Gets the temperature data and saves it
+            function getTemp(){
+                xhttp1 = new XMLHttpRequest();
+                xhttp1.onreadystatechange = function() {
+                    if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+                        updateTempChart(10,parseFloat(xhttp1.responseText));
+                    }
+                };
+                xhttp1.open("GET", "https://conrfield.com:1880/getTemp", true);
+                xhttp1.send();
 
-            updateLightChart(dataLength);
-            setInterval(function () {updateLightChart()}, updateInterval);
+            }
 
-            updateHumidityChart(dataLength);
-            setInterval(function () {updateHumidityChart()}, updateInterval);
+            //Gets the light data and saves it
+            function getLight(){
+                xhttp2 = new XMLHttpRequest();
+                xhttp2.onreadystatechange = function() {
+                    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+                        // Typical action to be performed when the document is ready:
+                        updateLightChart(10,parseFloat(xhttp2.responseText));
+                    }
+                };
+                xhttp2.open("GET", "https://conrfield.com:1880/getLight", true);
+                xhttp2.send();
+            }
 
-            setInterval(function () {
-                if(dataLength<20)
-                    dataLength++;
-            },updateInterval)
+            //Gets the humidity data and saves it
+            function getHumidity(){
+                xhttp3 = new XMLHttpRequest();
+                xhttp3.onreadystatechange = function() {
+                    if (xhttp3.readyState == 4 && xhttp3.status == 200) {
+                        // Typical action to be performed when the document is ready:
+                        updateHumidityChart(10,parseFloat(xhttp3.responseText));
 
+                    }
+                };
+                xhttp3.open("GET", "https://conrfield.com:1880/getHumidity", true);
+                xhttp3.send();
+            }
+
+            getTemp();
+            setInterval(getTemp,updateInterval);
+            getLight();
+            setInterval(getLight,updateInterval);
+            getHumidity();
+            setInterval(getHumidity,updateInterval);
 
         }
-
-
-        //Gets the temperature data and saves it
-        function getTemp(){
-            xhttp1 = new XMLHttpRequest();
-            xhttp1.onreadystatechange = function() {
-                if (xhttp1.readyState == 4 && xhttp1.status == 200) {
-
-                    //temp = xhttp1.responseText;
-
-                    temp = temp+1;
-                }
-            };
-            xhttp1.open("GET", "https://conrfield.com:1880/getTemp", true);
-            xhttp1.send();
-            return temp;
-        }
-
-        //Gets the light data and saves it
-        function getLight(){
-            xhttp2 = new XMLHttpRequest();
-            xhttp2.onreadystatechange = function() {
-                if (xhttp2.readyState == 4 && xhttp2.status == 200) {
-                    // Typical action to be performed when the document is ready:
-                    //  light = xhttp2.responseText;
-                    light = light+1;
-                }
-            };
-            xhttp2.open("GET", "https://conrfield.com:1880/getLight", true);
-            xhttp2.send();
-            return light;
-        }
-
-        //Gets the humidity data and saves it
-        function getHumidity(){
-            xhttp3 = new XMLHttpRequest();
-            xhttp3.onreadystatechange = function() {
-                if (xhttp3.readyState == 4 && xhttp3.status == 200) {
-                    // Typical action to be performed when the document is ready:
-                    //  humidity = xhttp3.responseText;
-                    humidity = humidity+1;
-                }
-            };
-            xhttp3.open("GET", "https://conrfield.com:1880/getHumidity", true);
-            xhttp3.send();
-            return humidity
-        }
-
 
     </script>
 
