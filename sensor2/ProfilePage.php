@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Connor">
 <title>Profile Page</title>
-<link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
-    type="text/css" media="screen"/>
-
-
+<link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+  
 <style>
+<!--instead of including in the style sheet, this will be used for errors:   -->
 .error{
 	color:red;
 }
 </style>
-<!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
--->
+
 </head>
 <body>
 
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
   
-  if($nameErr === "" & $emailErr === "" & $periodErr === "" & $name!=="" & $email!=="" & $period!==""){
+  if($nameErr === "" & $emailErr === "" & $periodErr === ""){
 	 $userData = new \stdClass(); //Not having this means it doesnt comply with E_STRICT standards as the pbject would be created from null
 		$userData->name = $name;
 		$userData->email = $email;
@@ -85,20 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	}
 	elseif(isset($_POST["submit2"])){
-		if (empty($_POST["email2"])) {
-    $email2Err = "Email is required";
-  } else {
-    $email2 = test_input($_POST["email2"]);
-	$email2Err = "";
-    // check if e-mail address is well-formed
-    if (!filter_var($email2, FILTER_VALIDATE_EMAIL)) {
-      $email2Err = "Invalid email format"; 
-    }
-  }
+		fopen('emaildata.json', 'w+');
 	}
-	else{
-		echo "god knows";
-	}
+	
  
 
   confirmationEmail($email, $emailErr);
@@ -126,49 +115,43 @@ mail("$email","Registration",$msg);
 
 
 
-<h1 class="clearfix"> 
-	<a href="index.html">
-		<img src="arrow-left.svg" alt="Back Arrow" style="width:42px;height:90px;border:0;float:left;">
+<h1> 
+	<a href="index.html" style="vertical-align: middle;">
+		<img class="arrow imgGH" src="arrow-left.svg" alt="Back Arrow" >
 	</a>
-	Profile Page!!
-	<img class="imgGH" src="greenhouse.png" alt="Just wanted a greenhouse image" >
+	Profile Page!
+	
 </h1>
 
-<!-- <hr></hr> -->
-<h2>Want To Be Notified Periodically?</h2>
-<p>Multiple email addresses can be added, and these will all be used in order to send you a notification when motion has been detected in the greenhouse, 
-and will also give you an update on what the temperature,light and humidity of the greenhouse (using sensortag with ID <b>987bf3131f23</b>)</p>
-<p>Just fill in the wee form below, hit the button and maybe magic will happen</p>
-<form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' style="margin:15px 30px;" method="post">
-  Name:<br> <input type="text" style="margin:5px 0px;" name="name" value="<?php echo $name; ?>">
-  <span class="error">* <?php echo $nameErr;?></span>
-  <br><br>
-  
-  Email Address to be notified:<br> <input type="text" style="margin:5px 0px;" name="email" value="<?php echo $email; ?>" >
-  <span class="error">* <?php echo $emailErr;?></span>
-  <br><br>
-  
-  How often would you like to be notified? (in hours)<br> <input type="text" style="margin:5px 0px;" name="period" value="<?php echo $period; ?>" > 
-  <span class="error">* <?php echo $periodErr;?></span>
-  <br><br>
-  <input type="submit" title="Once you're set, just hit here and we'll send you intermediate emails"
-			name="submit1" style="margin:5px 0px;" value="Get notifying!">
-</form>
-<br>
-<h2>Want To Stop Getting Emails? </h2>
-<p>Just type in your email address and if we have it, we'll remove it from our system once you hit the button</p>
-<form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' style="margin:15px 30px;" method="post">
-  Email Address that was registered:<br> <input type="text" style="margin:5px 0px;" name="email2" value="<?php echo $email2; ?>" >
-  <span class="error">* <?php echo $email2Err;?></span>
-  <br><br>
-  <input type="submit" title="Once you're set, just hit here and we'll get rid of that email address from our system"
-			name="submit2" style="margin:5px 0px;" value="Remove Me!"> <!--onclick='alert("Ooh got a cheeky click")'-->
-</form>
-<p id="yo"></p>
-<p>To go back <b><i>Home</i></b>, hit the Left Arrow which is clearly not labelled because I'm lazy</p>
-<br><p style="margin:15px;"><b>
-<!-- Some Error scripty stuff: -->
+<h2 style="margin-bottom:0.5em; margin-top:0.5em;">Want To Be Notified Upon Motion Detection?</h2>
+<p style="margin-bottom:0.5em;margin-top:0.5em;">Just provide your name and email address, and then these will be used to notify you when motion has been detected in the greenhouse, 
+and will also give you an update on what the temperature, light and humidity is of the greenhouse (using sensortag with ID <i>987bf3131f23</i>) at that time.
+<br>Just fill in the wee form below, hit the button and then you'll be sent a confirmation email.<br><br>
+If you have already filled in this form but made a typo, or want to use a different email address, just fill it in again and it'll
+replace the details we had on file.</p>
 
-</b></p>
+<p class="margin">
+<form class="margin" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'  method="post">
+  Name:<br> <input type="text" style="margin:5px 0px;" name="name"  style="margin:1vw 0vw;" value="<?php echo $name; ?>" placeholder="Fred Bloggs">
+  <span class="error">* <?php echo $nameErr;?></span>
+  
+  <br>
+  Email Address to be notified:<br> <input type="text"  style="margin:1vw 0vw;" name="email" value="<?php echo $email; ?>" placeholder="fredB@example.com" >
+  <span class="error">* <?php echo $emailErr;?></span>
+  
+  <br>
+  <input type="submit" title="Once you're set to sign up, just hit here"
+			name="submit1" style="margin:1vw 0vw;" value="Get notifying!">
+</form>
+</p>
+
+<h2 style="margin-bottom:0.5em;margin-top:0;">Want To Stop Getting Emails? </h2>
+<p style="margin-bottom:0.5em;margin-top:0.5em;">Just hit the button below and we'll get rid of the data we had saved.</p>
+<form class="margin" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'   method="post">
+  <input type="submit" title="Once you're set, just hit here and we'll get rid of your email address from our system"
+			name="submit2" onclick='alert("You will no longer recieve notifications")' style="margin:1vw 0vw;" value="Remove Me!"> 
+</form>
+<p id="finished"></p>
+
 </body>
 </html>

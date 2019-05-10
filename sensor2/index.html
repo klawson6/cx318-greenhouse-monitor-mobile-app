@@ -2,58 +2,78 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Connor ;p ">
-<title>Connor Index</title>
-<link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
-    type="text/css" media="screen"/>
-
-
+<meta name="author" content="Connor">
+<title>Smart Greenhouse Monitor</title>
+  
+  <!--My own style sheet:              -->
+  <link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
+  
+  <!--The below are all solely to allow the use of bootstrap sticky navigation bar:          -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
 
-<h1 width="100%" style="font-size: 5vw">  
-	Greenhouse Stuff!!
-	<picture>
-		
-		<!--<source srcset="menu-icon.png" media="(max-width: 10%)"  >
-			<source srcset="greenhouse.png" media="(max-width: 20%)" >
-			--><img  src="greenhouse.png"  alt="Just wanted a greenhouse image" >
-	</picture>
+<!--Heading with no bottom margin so it joins with nav bar:     -->
+<h1 style="margin-bottom:0;">  
+	Smart Greenhouse Monitor
 </h1>
 
-<ul>
-  <li><a href="index.html" title="Takes you to the first page">Home</a></li>
-  <li><a href="ProfilePage.php" title="Takes ya to the profile page">Profile</a></li>
-  <li><a href="SensorTag.html" title="Takes you to where sensor tag data is at">SensorTag Data</a></li>
-  <li><a href="#motionsensor" title="To the page that deals with motion sensor data">Motion Sensor Data</a></li>
-  <li><a href="WeatherPage.html" title="To the page that deals with weather data">Weather Data</a></li>
-  <li><a href="esp8266/app/controls.html" title="To the page that deals with controlling stuff">Controls</a></li>
-</ul>
-<!-- <hr></hr> -->
+<!--This is code for the bootstrap collapsible navigation bar, mostly using W3 Schools code  --> 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" style="top-margin:0;border:0;" >
 
+ <a class="navbar-brand" href="index.html" style="width:2em;">
+	<img class="imgGH" src="greenhouse.png" alt="logo" >
+  </a>
+  
+  <!-- Toggler/collapsibe Button aspect -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myCollapsible">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse"  id="myCollapsible">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="ProfilePage.php">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="SensorTag.html">SensorTag Data</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="WeatherPage.html">Weather Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="esp8266/app/controls.html">Controls</a>
+    </li>
+  </ul>
+  </div>
+</nav>
 
-<p>To gather our weather data, we used the<a href="https://www.metoffice.gov.uk/"> Met Office </a></p>
-<p>At the moment, only the Profile link works. You can hit that if you want to go to a page where
-nothing else works on it except ways to come back to this page. <br> The link stuff works as follows:</p>
-<p><dl>
-		<dt>Home </dt>
-			<dd>- This is the current page, just added it because it's nice to see a home bit </dd>
-		<dt>Profile</dt>
-			<dd>- This takes you to the php page where you would give an email address or something to get updates</dd>
-		<dt>SensorTag Data</dt>
-			<dd>- This should take you to where all the sensor tag data lies</dd>
-		<dt>Motion Sensor Data </dt>
-			<dd>- This should take you to where motion sensor data is displayed </dd>
-		<dt>Weather Data</dt>
-			<dd>- Ideally it would tell you about somewheather stuff. Could make make it ]
-			an IFrame which shows the MET Office site in a smaller window on-site </dd>
-			<dd>- Added a small widget because idk why </dd>
-		<dt>Controls</dt>
-			<dd>- Maybe one day this would be a control panel of sorts</dd>
-	</dl>
+<p><i><b><br>
+Our project works to have a way to monitor the conditions within a greenhouse- conditions such as motion, temperature, light and humidity.<br>
+We also set it up so that the user will have the ability to control some of those conditions, and be notified when motion is detected.<br>
+</i></b>
+There are also various links in the navigation bar which will take you to the following sections:<br>
 </p>
-	
 
+<h2>Profile Page</h2>
+<p>This takes you to the page where you can provide an email address and your name in order to be given an update when motion is detected, 
+or allow you to delete the data we have on you</p><br>
+
+<h2>SensorTag Data</h2>
+<p>This takes you to the page where sensortag data will be displayed, and it will update data every 5 seconds while the sensortag is active.</p><br>
+		
+<h2>Weather Data</h2>
+<p>This will allow you to easily check the local weather conditions with respect to your greenhouse location.<br>
+To gather our weather data, we used the<a href="https://www.metoffice.gov.uk/"> Met Office </a> website as a source for our information</p>
+
+<h2>Controls</h2>
+<p>This will take you to a page where you can provide an ESP ID, and then connect to it (if it is active) in order to be able to control some
+of the greenhouse conditions</p><br>
+	
 
 </body>
 </html>
