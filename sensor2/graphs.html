@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Connor">
-<meta charset="utf-8" />
-<title>SensorTag Data</title>
-<link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
-    type="text/css" media="screen"/>
+    <title>SensorTag Data Graphs</title>
+    <link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
+          type="text/css" media="screen"/>
 
- <!--The below are added because I couldn't get the header background colours to reach the sides of the screen:          -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+
+        // getTemp();
+        // getLight();
+        // getHumidity();
+
+        //Global variables for the data
+
+
 
         window.onload = function () {
 
@@ -21,7 +24,7 @@
             var dps = []; // dataPoints
             var dps1 = [];
             var dps2 = [];
-            var updateInterval = 5000; //5 second intervals
+            var updateInterval = 3000;
             var dataLength = 10; // number of dataPoints visible at any point
 
             var tempChart = new CanvasJS.Chart("tempChartContainer", {
@@ -57,7 +60,7 @@
                 },
                 axisY: {
                     includeZero: false,
-                    title: "Light (lux)",
+                    title: "Light (lx)",
                 },
                 data: [{
                     type: "line",
@@ -77,7 +80,7 @@
                 axisY: {
 
                     includeZero: false,
-                    title: "Humidity (%rH)",
+                    title: "Humidity",
                 },
                 data: [{
                     type: "line",
@@ -172,17 +175,9 @@
             function getTemp(){
                 xhttp1 = new XMLHttpRequest();
                 xhttp1.onreadystatechange = function() {
-				if(xhttp1.responseText == ";" || xhttp1.responseText == "0"){
-			updateTempChart(10, 0);
-			document.getElementById("myTemp").innerHTML = "No temperature to display";
-			document.getElementById("message").innerHTML = "Sensortag must be off.";
-		}
-		else{
-		
-		updateTempChart(10,parseFloat(xhttp1.responseText));
-       document.getElementById("myTemp").innerHTML = xhttp1.responseText.replace(";", "") + " °C";
-	   document.getElementById("message").innerHTML = "Recieving sensortag data successfully.";
-	   }
+                    if (xhttp1.readyState == 4 && xhttp1.status == 200) {
+                        updateTempChart(10,parseFloat(xhttp1.responseText));
+                    }
                 };
                 xhttp1.open("GET", "https://conrfield.com:1880/getTemp", true);
                 xhttp1.send();
@@ -194,15 +189,8 @@
                 xhttp2 = new XMLHttpRequest();
                 xhttp2.onreadystatechange = function() {
                     if (xhttp2.readyState == 4 && xhttp2.status == 200) {
-					   // Typical action to be performed when the document is ready:
-	   if(xhttp2.responseText == ";"){
-	   updateLightChart(10, 0);
-			document.getElementById("myLight").innerHTML = "No light to display";
-		}
-		else{
-		updateLightChart(10,parseFloat(xhttp2.responseText));
-       document.getElementById("myLight").innerHTML = xhttp2.responseText.replace(";", "") + " Lux";
-	   }   
+                        // Typical action to be performed when the document is ready:
+                        updateLightChart(10,parseFloat(xhttp2.responseText));
                     }
                 };
                 xhttp2.open("GET", "https://conrfield.com:1880/getLight", true);
@@ -214,18 +202,9 @@
                 xhttp3 = new XMLHttpRequest();
                 xhttp3.onreadystatechange = function() {
                     if (xhttp3.readyState == 4 && xhttp3.status == 200) {
-                       
-
-if(xhttp3.responseText == ";"){
-		 // Typical action to be performed when the document is ready:
-                        updateHumidityChart(10,0);
-			document.getElementById("myHumidity").innerHTML = "No humidity to display";
-		}
-		else{
-		 // Typical action to be performed when the document is ready:
+                        // Typical action to be performed when the document is ready:
                         updateHumidityChart(10,parseFloat(xhttp3.responseText));
-        document.getElementById("myHumidity").innerHTML = xhttp3.responseText.replace(";", "") + " %rH";
-	   }
+
                     }
                 };
                 xhttp3.open("GET", "https://conrfield.com:1880/getHumidity", true);
@@ -246,31 +225,14 @@ if(xhttp3.responseText == ";"){
 </head>
 <body>
 
-<h1>  
-     <a href="index.html" style="vertical-align: middle;">
-		<img class="arrow imgGH" src="arrow-left.svg" alt="Back Arrow" >
-	</a>
-	SensorTag Data
-	
+<h1>
+    SensorTag Data Graphs!
 </h1>
-<p>Any temperature, light or humidity data was taken from the sensortag with device ID <i>987bf3131f23</i></p>
-<p>The immediately below results will update every 5 seconds to show data at that instance, if the sensortag is on.</p>
 
-<h2 class="noUpDownMargin"> Current Temperature: </h2>
-<p>	<div class="noUpDownMargin" id="myTemp">Temperature placeholder </div> </p>
-<h2 class="noUpDownMargin"> Current Light: </h2>
-<p> <div class="noUpDownMargin" id="myLight">Light placeholder</div>  </p>
-<h2 class="noUpDownMargin"> Current Humidity: </h2>
-<p> <div class="noUpDownMargin" id="myHumidity">Humidity placeholder</div> </p>
+<p><div id="tempChartContainer" style="height: 300px; width: 100%;"></div></p>
+<p><div id="lightChartContainer" style="height: 300px; width: 100%;"></div></p>
+<p><div id="humidityChartContainer" style="height: 300px; width: 100%;"></div></p>
 
-<b><p id="message"></p></b>
-<p>Below are graphical representations of the greenhouse conditions:<br><p>
 
-<div class="margin">
-<p><div id="tempChartContainer" style="height: 20vw; width: 80vw;"></div></p>
-<p><div id="lightChartContainer" style="height: 20vw; width:  80vw;"></div></p>
-<p><div id="humidityChartContainer" style="height: 20vw; width:  80vw;"></div></p>
-<div>
 
 </body>
-</html>
