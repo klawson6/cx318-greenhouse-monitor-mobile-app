@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="style1.css" title="Mainly gray tbh"
     type="text/css" media="screen"/>
 
+ <!--The below are added because I couldn't get the header background colours to reach the sides of the screen:          -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
 </head>
 <body>
@@ -16,18 +19,18 @@
      <a href="index.html" style="vertical-align: middle;">
 		<img class="arrow imgGH" src="arrow-left.svg" alt="Back Arrow" >
 	</a>
-	SensorTag Data Results!
+	SensorTag Data
 	
 </h1>
 <p>Any temperature, light or humidity data was taken from the sensortag with device ID <i>987bf3131f23</i></p>
 <p>The results shown below will update every 5 seconds, if the sensortag is on.</p>
 
-<h2> Temperature Results: </h2>
-<p>	<div class="margin" id="myTemp">Temperature placeholder </div> <br> </p>
-<h2> Light Results: </h2>
-<p> <div class="margin" id="myLight">Light placeholder</div> <br> </p>
-<h2> Humidity Results: </h2>
-<p> <div class="margin" id="myHumidity">Humidity placeholder</div><br> </p>
+<h2 class="noUpDownMargin"> Temperature Results: </h2>
+<p>	<div class="noUpDownMargin" id="myTemp">Temperature placeholder </div> </p>
+<h2 class="noUpDownMargin"> Light Results: </h2>
+<p> <div class="noUpDownMargin" id="myLight">Light placeholder</div>  </p>
+<h2 class="noUpDownMargin"> Humidity Results: </h2>
+<p> <div class="noUpDownMargin" id="myHumidity">Humidity placeholder</div> </p>
 
 <b><p id="message"></p></b>
 
@@ -51,7 +54,7 @@ xhttp1.onreadystatechange = function() {
 			document.getElementById("message").innerHTML = "Sensortag must be off.";
 		}
 		else{
-       document.getElementById("myTemp").innerHTML = xhttp1.responseText;
+       document.getElementById("myTemp").innerHTML = xhttp1.responseText.replace(";", "") + " Degrees Celcius";
 	   document.getElementById("message").innerHTML = "Recieving sensortag data successfully.";
 	   }
     }
@@ -69,7 +72,7 @@ xhttp2.onreadystatechange = function() {
 			document.getElementById("myLight").innerHTML = "No light to display";
 		}
 		else{
-       document.getElementById("myLight").innerHTML = xhttp2.responseText;
+       document.getElementById("myLight").innerHTML = xhttp2.responseText.replace(";", "") + " Lux";
 	   }
     }
 };
@@ -86,7 +89,7 @@ xhttp3.onreadystatechange = function() {
 			document.getElementById("myHumidity").innerHTML = "No humidity to display";
 		}
 		else{
-       document.getElementById("myHumidity").innerHTML = xhttp3.responseText;
+       document.getElementById("myHumidity").innerHTML = xhttp3.responseText.replace(";", "") + " grams of water vapor per cubic meter of air (g/m3)";
 	   }
     }
 };

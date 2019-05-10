@@ -23,24 +23,28 @@ h1{
     margin-inline-end: 0px;
 }
 
-h2{
-	margin : 5vw 8vw;
-}
 
 p{
-	margin : 5vw 8vw;
+	margin : 2vw 8vw;
 }
 
+h2{
+	margin : 2vw 8vw;
+}
 .margin{
-	margin : 4vw 8vw;
+	margin : 2vw 8vw;
 }
 
-
+.noUpDownMargin{
+	margin : 0vw 8vw;
+}
 img.imgGH{
 border: 1vw;
 vertical-align: middle;
 
 }
+
+
 
 .arrow{
 	float:left;
