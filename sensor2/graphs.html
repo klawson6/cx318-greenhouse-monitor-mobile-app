@@ -13,9 +13,9 @@
         // getHumidity();
 
         //Global variables for the data
-        var temp = 13;
-        var light = 25;
-        var humidity = 5;
+        var temp = 0;
+        var light = 0;
+        var humidity = 0;
 
 
         window.onload = function () {
@@ -25,21 +25,28 @@
             var dps = []; // dataPoints
             var dps1 = [];
             var dps2 = [];
-            var xVal = 0;
-            yVal = 100;
-            var updateInterval = 1000;
+           var xVal = 0;
+            var updateInterval = 3000;
             var dataLength = 20; // number of dataPoints visible at any point
 
             var tempChart = new CanvasJS.Chart("tempChartContainer", {
                 title: {
                     text: "Temperature Data"
                 },
+                axisX:{
+                    title: "Time (h:m:s)" ,
+                    gridThickness: 2,
+                   valueFormatString:" HH:mm:ss",
+                     labelAngle: -20
+                },
                 axisY: {
+                    title: "Temperature",
                     includeZero: false
                 },
                 data: [{
                     type: "line",
-                    dataPoints: dps
+                    dataPoints: dps,
+                   // xValueFormatString: "hh:mm:ss",
                 }]
             });
 
@@ -47,8 +54,15 @@
                 title: {
                     text: "Ambient Light Data"
                 },
+                axisX:{
+                    title: "Time (h:m:s)" ,
+                    gridThickness: 2,
+                    valueFormatString:" HH:mm:ss",
+                    labelAngle: -20
+                },
                 axisY: {
-                    includeZero: false
+                    includeZero: false,
+                    title: "Light",
                 },
                 data: [{
                     type: "line",
@@ -59,8 +73,15 @@
                 title: {
                     text: "Humidity Data"
                 },
+                axisX:{
+                    title: "Time (h:m:s)" ,
+                    gridThickness: 2,
+                    valueFormatString:" HH:mm:ss",
+                    labelAngle: -20
+                },
                 axisY: {
-                    includeZero: false
+                    includeZero: false,
+                    title: "Humidity",
                 },
                 data: [{
                     type: "line",
@@ -74,29 +95,29 @@
 
                 count = count || 1;
 
-                // var d = new Date();
-                //  d.getHours();
-                //  d.getMinutes();
-                //  d.getSeconds();
-                //  xVal = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+                var time = new Date();
+               xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
 
-                for (var j = 0; j < count; j++) {
-                    // yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                var  yVal = getTemp();
 
-                    dps.push({
-                            x: xVal,
-                            y: getTemp()
-                        }
-                    );
-                    xVal++;
+              if(yVal !== null) {
+                  for (var j = 0; j < count; j++) {
 
-                }
+                      dps.push({
+                              x: xVal,
+                              y: yVal
+                          }
+                      );
 
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
+                  }
 
-                tempChart.render();
+                  if (dps.length > dataLength) {
+                      dps.shift();
+                  }
+
+
+                  tempChart.render();
+             }
             };
 
             //Function to update the light chart with new data
@@ -105,21 +126,16 @@
 
                 count = count || 1;
 
-                // var d = new Date();
-                //  d.getHours();
-                //  d.getMinutes();
-                //  d.getSeconds();
-                //  xVal = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+                var time = new Date();
+                xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
 
                 for (var j = 0; j < count; j++) {
-                    // yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
 
                     dps1.push({
                             x: xVal,
                             y: getLight()
                         }
                     );
-                    xVal++;
 
                 }
 
@@ -137,21 +153,16 @@
 
                 count = count || 1;
 
-                // var d = new Date();
-                //  d.getHours();
-                //  d.getMinutes();
-                //  d.getSeconds();
-                //  xVal = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+                var time = new Date();
+                xVal = new Date(time.getFullYear(),time.getMonth(),time.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
 
                 for (var j = 0; j < count; j++) {
-                    // yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
 
                     dps2.push({
                             x: xVal,
                             y: getHumidity()
                         }
                     );
-                    xVal++;
 
                 }
 
@@ -171,6 +182,11 @@
             updateHumidityChart(dataLength);
             setInterval(function () {updateHumidityChart()}, updateInterval);
 
+            setInterval(function () {
+                if(dataLength<20)
+                    dataLength++;
+            },updateInterval)
+
 
         }
 
@@ -181,7 +197,7 @@
             xhttp1.onreadystatechange = function() {
                 if (xhttp1.readyState == 4 && xhttp1.status == 200) {
 
-                    // temp = xhttp1.responseText;
+                    //temp = xhttp1.responseText;
 
                     temp = temp+1;
                 }
