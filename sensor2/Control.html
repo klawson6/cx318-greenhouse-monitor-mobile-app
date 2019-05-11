@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<title>Fan and Heater Control</title>
+<link rel="stylesheet" href="style1_kyle.css" title="Mainly gray tbh" type="text/css" media="screen"/>
+
+    <script language="JavaScript" src="libs/jquery/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script language="JavaScript" src="control.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="topInfo">
+    <h1 id="Control_head">Fan and Heater Control</h1>
+    <ul>
+        <li><a href="websockets/index.html" title="Takes you to the first page">Home</a></li>
+        <li><a href="ProfilePage.php" title="Takes ya to the profile page">Profile</a></li>
+        <li><a href="SensorTag.html" title="Takes you to where sensor tag data is at">SensorTag Data</a></li>
+        <li><a href="#motionsensor" title="To the page that deals with motion sensor data">Motion Sensor Data</a></li>
+        <li><a href="WeatherPage.html" title="To the page that deals with weather data">Weather Data</a></li>
+        <li><a href="esp8266/app/controls.html" title="To the page that deals with controlling stuff">Controls</a></li>
+    </ul>
+</div>
+
+
+<div class="container" id="controlHome">
+    <div id="searchTextDiv">
+        <span id="searchtext">Search for a Nearby Greenhouse Monitor</span>
+    </div>
+    <div id="searchDiv">
+        <button id="searchButton">Search</button>
+    </div>
+</div>
+
+<div class="container" id="controlContainer" style="display: none">
+    <div id="currentInfo">
+        <div class="column">
+            <h3>Temperature</h3>
+            <p class="statusText">X °C</p>
+        </div>
+        <div class="column">
+            <h3>Brightness</h3>
+            <p class="statusText">Y lx</p>
+        </div>
+        <div class="column">
+            <h3>Humidity</h3>
+            <p class="statusText">Z gm^-3</p>
+        </div>
+    </div>
+    <div class="imgContainer" id="fanContainer">
+        <img class="controlImg" id="fanImg" src="img/fan0.png" />
+        <p class="caption" id="fanText">Ventilation Off</p>
+    </div>
+    <div class="imgContainer" id="heaterContainer">
+        <img class="controlImg" id="heaterImg" src="img/heater.png" />
+        <p class="caption" id="heatingText">Heating Off</p>
+    </div>
+</div>
+</body>
+</html>
