@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Connor">
-<title>Profile</title>
-<link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Connor">
+	<title>Profile</title>
+	
+	<!--My own style sheet:            -->
+	<link rel="stylesheet" href="style1.css" title="My stylesheet" type="text/css" media="screen"/>
   
-  <!--The below are added because I couldn't get the header background colours to reach the sides of the screen:          -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-
-<style>
-<!--instead of including in the style sheet, this will be used for errors:   -->
-.error{
-	color:red;
-}
-</style>
-
+	<!--The below are added because I couldn't get the header background colours to reach the sides of the screen:          -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -26,17 +19,19 @@
 $nameErr = $emailErr = $email2Err = "";
 $name = $email = $email2 = "";
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	//If the first button is pressed:
 	if(isset($_POST["submit1"])){
 		 if (empty($_POST["name"])) {
-    $nameErr = "Name is required";
+			$nameErr = "Name is required";
   } else {
-    $name = test_input($_POST["name"]);
-	$nameErr = "";
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-      $nameErr = "Only letters and white space allowed"; 
-    }
+		$name = test_input($_POST["name"]);
+		$nameErr = "";
+		// check if name only contains letters and whitespace
+		if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+			$nameErr = "Only letters and white space allowed"; 
+		}
   }
 
   if (empty($_POST["email"])) {
@@ -54,55 +49,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   
   if($nameErr === "" & $emailErr === ""){
-	 echo '<script> document.getElementById("finished").innerHTML = "You will recieve a confirmation email shortly if your details are correct.";</script>';
 	 $userData = new \stdClass(); //Not having this means it doesnt comply with E_STRICT standards as the pbject would be created from null
-		$userData->name = $name;
-		$userData->email = $email;
-		$myJSON = json_encode($userData);
+		$userData->name = $name; //Adds key name and value $name 
+		$userData->email = $email; //Adds key email and value $email
+		$myJSON = json_encode($userData); //makes the userData string stuff into more of a JSON object
 		
 		if(json_decode($myJSON)!=null){
-		$file = fopen('emaildata.json', 'w+');
-		
-		fwrite($file, $myJSON);
-		fclose($file);
-		
+			$file = fopen('emaildata.json', 'w+'); //deletes any file with that name if one exists, and creates a new file with that name
+			fwrite($file, $myJSON); //Writes the myJSON to the file just created
+			fclose($file); //Closes the file so it is no longer in use
 		}
-		
-		
-  confirmationEmail($email, $emailErr);
-	}
-	else{
-		echo '<script>document.getElementById("finished").innerHTML = "There was an issue with your details, could not sign you up";  </script> ';
+	confirmationEmail($email, $emailErr); 
 	}
 	
-	
-	
-	
-	}
+   }
+	//If the second button was pressed:
 	elseif(isset($_POST["submit2"])){
-		fopen('emaildata.json', 'w+');
+		fopen('emaildata.json', 'w+'); //Opens the file if it exists but deletes its content, otherwise creates a new file from scratch
 	}
 	
   
   function test_input($data) {
-  $data = trim($data); //Takes out multiple spare spaces, tabs and newlines
-  $data = stripslashes($data); //Takes out back slashes
-  $data = htmlspecialchars($data); //Changes stuff that looks like html ('<', '>') to funky & stuff to protecc
-  return $data;
-}
-function confirmationEmail($email, $emailErr){
-// the message
-$msg = "Welcome!\nYou are now registered to recieve emails when motion has been detected within the greenhouse.";
-
-// send email
-if($emailErr == ""){
-mail("$email","Registration",$msg);
-}
-}
+	$data = trim($data); //Takes out multiple spare spaces, tabs and newlines
+	$data = stripslashes($data); //Takes out back slashes
+	$data = htmlspecialchars($data); //Changes stuff that looks like html ('<', '>') to funky & stuff to protecc
+	return $data;
+	}
+	
+	function confirmationEmail($email, $emailErr){
+	//send message:
+	$msg = "Welcome!\nYou are now registered to recieve emails when motion has been detected within the greenhouse.";
+	//send email:
+	if($emailErr == ""){
+		mail("$email","Registration",$msg);
+	}
+  }
 ?>
-
-
-
 
 <h1> 
 	<a href="index.html" style="vertical-align:">
@@ -122,11 +104,11 @@ replace the details we had on file.</p>
 <p class="noUpDownMargin">
 <form class="margin" style="margin-top:0vw;margin-bottom:0vw;" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'  method="post">
   Name:<br> <input type="text" style="margin:5px 0px;" name="name"  style="margin:1vw 0vw;" value="<?php echo $name; ?>" placeholder="Fred Bloggs">
-  <span class="error">* <?php echo $nameErr;?></span>
+  <span style="color:red">* <?php echo $nameErr;?></span>
   
   <br>
   Email Address to be notified:<br> <input type="text"  style="margin:1vw 0vw;" name="email" value="<?php echo $email; ?>" placeholder="fredB@example.com" >
-  <span class="error">* <?php echo $emailErr;?></span>
+  <span style="color:red">* <?php echo $emailErr;?></span>
   
   <br>
   <input type="submit" title="Once you're set to sign up, just hit here"
@@ -140,7 +122,7 @@ replace the details we had on file.</p>
   <input type="submit" title="Once you're set, just hit here and we'll get rid of your email address from our system"
 			name="submit2" onclick='alert("You will no longer recieve notifications")' style="margin-top:0vw;" value="Remove Me!"> 
 </form>
-<p id="finished"></p>
+<p><div id="finished"></div></p>
 
 </body>
 </html>

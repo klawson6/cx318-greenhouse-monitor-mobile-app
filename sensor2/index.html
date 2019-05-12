@@ -1,62 +1,57 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Connor">
-<title>Smart Greenhouse Monitor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Connor">
+	<title>Smart Greenhouse Monitor</title>
   
-  <!--My own style sheet:              -->
-  <link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
+	<!--My own style sheet:              -->
+	<link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
   
-  <!--The below are all solely to allow the use of bootstrap sticky navigation bar:          -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
+	<!--The below are all to allow the use of bootstrap sticky navigation bar, and ensure the background of h1 reaches page sides properly:          -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<!--Heading with no bottom margin so it joins with nav bar:     -->
-<h1 style="margin-bottom:0;">  
-	Smart Greenhouse Monitor
-</h1>
-
-<!--This is code for the bootstrap collapsible navigation bar, mostly using W3 Schools code  --> 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" style="top-margin:0;border:0;" >
-
- <a class="navbar-brand" href="index.html" style="width:2em;">
-	<img class="imgGH" src="greenhouse.png" alt="logo" >
-  </a>
-  
-  <!-- Toggler/collapsibe Button aspect -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myCollapsible">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse"  id="myCollapsible">
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="ProfilePage.php">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="SensorTag.html">SensorTag Data</a>
-    </li>
-	<li class="nav-item">
-      <a class="nav-link" href="WeatherPage.html">Weather Data</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="esp8266/app/controls.html">Controls</a>
-    </li>
-  </ul>
-  </div>
-</nav>
-
+	<!--Heading with no bottom margin so it joins with nav bar:     -->
+	<h1 style="margin-bottom:0;">  
+		Smart Greenhouse Monitor
+	</h1>
+	<!--This is code for the bootstrap collapsible navigation bar, mostly using W3 Schools code  --> 
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" style="top-margin:0;border:0;" >
+		<!--This uses a greenhouse image we had to be like a logo, which sits at the corner of the navigation bar, also a link to itself in case used elsewhere:-->
+		<a class="navbar-brand" href="index.html" style="width:2em;">
+			<img class="imgGH" src="greenhouse.png" alt="logo" >
+		</a>
+		<!-- Toggler/collapsibe Button aspect: -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myCollapsible">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!--The naviagation bar using classes from the imported stylesheet, and using our app links:        -->
+		<div class="collapse navbar-collapse"  id="myCollapsible">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="ProfilePage.php">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="SensorTag.html">SensorTag Data</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="WeatherPage.html">Weather Data</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="esp8266/app/controls.html">Controls</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 <p><i><b><br>
-Our project works to have a way to monitor the conditions within a greenhouse- conditions such as motion, temperature, light and humidity.<br>
-We also set it up so that the user will have the ability to control some of those conditions, and be notified when motion is detected.<br>
-</i></b>
-There are also various links in the navigation bar which will take you to the following sections:<br>
+	Our project works to have a way to monitor the conditions within a greenhouse- conditions such as motion, temperature, light and humidity.<br>
+	We also set it up so that the user will have the ability to control some of those conditions, and be notified when motion is detected.<br>
+	</i></b>
+	There are also various links in the navigation bar which will take you to the following sections:<br>
 </p>
 
 <h2>Profile Page</h2>
@@ -74,6 +69,5 @@ To gather our weather data, we used the<a href="https://www.metoffice.gov.uk/"> 
 <p>This will take you to a page where you can provide an ESP ID, and then connect to it (if it is active) in order to be able to control some
 of the greenhouse conditions</p><br>
 	
-
 </body>
 </html>
