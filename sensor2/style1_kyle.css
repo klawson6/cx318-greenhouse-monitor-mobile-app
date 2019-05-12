@@ -102,7 +102,7 @@ li a:hover {
 
 #currentInfo{
     max-width: 90%;
-    max-height: 50%;
+    max-height: 10%;
     margin: 0 auto;
     text-align: center;
     font-family: impact;
@@ -127,7 +127,7 @@ li a:hover {
 
 .imgContainer{
     max-width: 30%;
-    max-height: 50%;
+    max-height: 15%;
     margin: 10%;
     display: inline-block;
     float: left;
@@ -144,14 +144,14 @@ li a:hover {
     width: 100%;
 }
 
-#searchDiv {
-    height: 100%;
+.searchDiv{
+    height: 10%;
     width: 60%;
     margin: 0 20%;
     padding: 5% 0;
 }
 
-#searchButton {
+.searchButton {
     font-size: 6vw;
     width: 100%;
     height: 100%;
@@ -162,11 +162,11 @@ li a:hover {
     border-color: #3d7679;
 }
 
-#searchButton:focus {
+.searchButton:focus {
     outline: 0;
 }
 
-#searchButton:active {
+.searchButton:active {
     background: #77aaa9;
 }
 
@@ -177,4 +177,40 @@ li a:hover {
     font-size: 7vw;
     padding: 5% 0;
     font-family: impact;
+}
+
+#pirDiv{
+    width: 80%;
+    margin: 0 10%;
+    height: 10%;
+    text-align: center;
+    display: inline-block;
+}
+
+#pirText{
+    width: 100%;
+    height: 100%;
+    font-size: 4vw;
+    margin: 0;
+}
+
+#weatherDiv{
+    width: 80%;
+    height: 40%;
+    margin: 0 10%;
+    text-align: center;
+}
+
+#weatherHeadingDiv{
+    width: 100%;
+    height: 20%;
+}
+
+#weatherInfoDiv{
+    width: 100%;
+    height: 80%;
+}
+
+.weatherInfo{
+    margin: 0 5% 5% 5%;
 }
