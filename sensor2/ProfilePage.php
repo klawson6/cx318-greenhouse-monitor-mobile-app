@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <h1> 
 	<a href="index.html" style="vertical-align:">
-		<img class="arrow imgGH" src="arrow-left.svg" alt="Back Arrow" >
+		<img class="arrow imgGH" src="img/arrow-left.svg" alt="Back Arrow" >
 	</a>
 	Profile Page!
 	
