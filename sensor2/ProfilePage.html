@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Connor">
+	<title>Profile</title>
+
+	<!--My own style sheet:            -->
+	<link rel="stylesheet" href="style1.css" title="My stylesheet" type="text/css" media="screen"/>
+
+	<!--The below are added because I couldn't get the header background colours to reach the sides of the screen:          -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<h1>
+	<a href="index.html" style="vertical-align:">
+		<img class="arrow imgGH" src="img/arrow-left.svg" alt="Back Arrow" >
+	</a>
+	Profile Page!
+
+</h1>
+
+<h2 style="margin-bottom:0.5em; margin-top:0.5em;">Want To Be Notified Upon Motion Detection?</h2>
+<p style="margin-bottom:0.5em;margin-top:0.5em;">Just provide your name and email address, and then these will be used to notify you when motion has been detected in the greenhouse,
+	and will also give you an update on what the temperature, light and humidity is of the greenhouse (using sensortag with ID <i>987bf3131f23</i>) at that time.
+	<br><br>Just fill in the wee form below, hit the button and then you'll be sent a confirmation email.<br>
+	If you have already filled in this form but made a typo, or want to use a different email address, just fill it in again and it'll
+	replace the details we had on file.</p>
+
+<p class="noUpDownMargin">
+<form  id = "form1" class="margin" style="margin-top:0vw;margin-bottom:0vw;" action="https://devweb2018.cis.strath.ac.uk/~srb16177/save-file.php"  method="post">
+	Name:<br> <input type="text" style="margin:5px 0px;" name="name"  required style="margin:1vw 0vw;"  placeholder="Fred Bloggs">
+
+	<br>
+	Email Address to be notified:<br> <input type="text" id="email" style="margin:1vw 0vw;" required name="email"   placeholder="fredB@example.com" >
+
+	<br>
+	<input type="submit" title="Once you're set to sign up, just hit here"
+		   name="submit1" style="margin-bottom:0" value="Get notifying!" >
+</form>
+</p>
+
+
+<h2 style="margin-bottom:0.5em;margin-top:0;">Want To Stop Getting Emails? </h2>
+<p style="margin-bottom:0.5em;margin-top:0.5em;">Just hit the button below and we'll get rid of the data we had saved.</p>
+<form class="margin" action="https://devweb2018.cis.strath.ac.uk/~srb16177/save-file.php"  style="margin-top:0vw;" method="post">
+	<input type="submit" title="Once you're set, just hit here and we'll get rid of your email address from our system"
+		   name="submit2" onclick='alert("You will no longer recieve notifications")' style="margin-top:0vw;" value="Remove Me!">
+</form>
+
+
+</body>
+</html>
