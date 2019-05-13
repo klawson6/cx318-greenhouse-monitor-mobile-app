@@ -125,6 +125,8 @@ control.connect = function () {
         if (event.data == "alert" && pirFlag) {
             $('#pirText').text("PIR Detection at: " + new Date().toString());
             pirFlag = 0;
+            // AJAX GET request on the php script to email notify of a PIR detection
+            $.get("https://devweb2018.cis.strath.ac.uk/~xsb16116/greenhouse/sensor2/email-users.php");
             setTimeout(function () {
                 pirFlag = 1;
             }, 5000);
@@ -170,6 +172,7 @@ control.connected = function () {
         success: control.displayWeather,
         dataType: "json"
     });
+
 };
 
 // Callback function to parse the data returned from MetOffice Datapoint
