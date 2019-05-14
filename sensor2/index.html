@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Connor">
 	<title>Smart Greenhouse Monitor</title>
-  
+    <meta charset="utf-8" />
 	<!--My own style sheet:              -->
 	<link rel="stylesheet" href="style1.css" title="Mainly gray tbh" type="text/css" media="screen"/>
   
@@ -39,9 +39,6 @@
 					<a class="nav-link" href="SensorTag.html">SensorTag Data</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="WeatherPage.html">Weather Data</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link" href="esp8266/app/controls.html">Controls</a>
 				</li>
 			</ul>
@@ -49,25 +46,24 @@
 	</nav>
 <p><i><b><br>
 	Our project works to have a way to monitor the conditions within a greenhouse- conditions such as motion, temperature, light and humidity.<br>
-	We also set it up so that the user will have the ability to control some of those conditions, and be notified when motion is detected.<br>
+	We also set it up so that the user will have the ability to control some of those conditions, and be notified when motion is detected or when temperature 
+	is outside a specific range.<br>
 	</i></b>
-	There are also various links in the navigation bar which will take you to the following sections:<br>
+	There are various links in the navigation bar which will take you to the following sections:<br>
 </p>
 
 <h2>Profile Page</h2>
-<p>This takes you to the page where you can provide an email address and your name in order to be given an update when motion is detected, 
-or allow you to delete the data we have on you</p><br>
+<p>This takes you to the page where you can provide an email address and your name in order to be given an update when motion is detected and when temperature is 
+outside our ideal good range of 20-24°C (exclusive, checking every 5 minutes), or allow you to delete the data we have on you.</p><br>
 
 <h2>SensorTag Data</h2>
 <p>This takes you to the page where sensortag data will be displayed, and it will update data every 5 seconds while the sensortag is active.</p><br>
-		
-<h2>Weather Data</h2>
-<p>This will allow you to easily check the local weather conditions with respect to your greenhouse location.<br>
-To gather our weather data, we used the<a href="https://www.metoffice.gov.uk/"> Met Office </a> website as a source for our information</p>
-
+	
 <h2>Controls</h2>
-<p>This will take you to a page where you can provide an ESP ID, and then connect to it (if it is active) in order to be able to control some
-of the greenhouse conditions</p><br>
+<p>This will take you to a page where you can provide an ESP8266 ID, and then connect to it (if it is active) in order to be able to control some
+of the greenhouse conditions. <br>
+This page will also allow you to easily check the local weather conditions with respect to your greenhouse location.<br>
+To gather our weather data, we used the<a href="https://www.metoffice.gov.uk/"> Met Office </a> website as a source for our information.</p><br>
 	
 </body>
 </html>
